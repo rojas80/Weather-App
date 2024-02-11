@@ -1,0 +1,1 @@
+import styleSheet from '../src/stylesheet.css';
