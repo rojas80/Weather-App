@@ -1,0 +1,20 @@
+body{
+}
+
+header{
+    border: 1px solid red;
+    display: flex;
+    justify-content: space-evenly;
+}
+.appMainContainer{
+    border: 1px solid blue;
+}
+footer{
+    border: 1px solid green;
+
+    text-align: center;
+}
+.githublogo{
+    width: 4vw;
+    height: 3vh;
+}
