@@ -1,4 +1,4 @@
-const { toDate, format, parse } = require("date-fns");
+const {format, parse} = require("date-fns");
 
 function currentWeatherDataLayout(weatherData){
     const currentWeatherContainer = document.querySelector('.currentWeatherContainer');
@@ -22,13 +22,13 @@ function currentWeatherDataLayout(weatherData){
    
     const presentDate = document.createElement('p');
     presentDate.textContent = formattedDate;
-    dataContainer.append(presentDate,locationName, condition, currentTemp);
+    dataContainer.append(locationName, condition, currentTemp, presentDate);
 
     iconContainer.append(icon);
 
     currentWeatherContainer.append(dataContainer,iconContainer);
 }
-// update the date formate
+
 function twoDaysForecastLayout(weatherData){
     const twoDaysForecastContainer = document.querySelector('.twoDaysForecastContainer');
     const title = document.createElement('h2');
@@ -38,11 +38,11 @@ function twoDaysForecastLayout(weatherData){
     daysForecastContainer.classList.add('daysForecastContainer');
     
     const forecastData =  weatherData.forecast.forecastday;
+    console.log('F:',forecastData);
+    console.log("L", forecastData.length);
     twoDaysForecastContainer.append(title);
 
     for(let daysIndex = 1; daysIndex < forecastData.length; daysIndex++){
-        const daysForecastContainer = document.createElement('div');
-        daysForecastContainer.classList.add('daysForecastContainer');
 
         const subForecastContainer = document.createElement('div');
         subForecastContainer.classList.add('subForecastContainer');
@@ -60,10 +60,10 @@ function twoDaysForecastLayout(weatherData){
         maxMInTemp.textContent = forecastData[daysIndex].day.maxtemp_f +'°F / '+ forecastData[daysIndex].day.mintemp_f + '°F';
 
         const forecastDate = document.createElement('p');
+        console.log(forecastData[daysIndex].date);
 
-
-
-        const formattedDate = format(new Date(forecastData[daysIndex].date), "EEE MMM dd");
+        const parsedDate = parse(forecastData[daysIndex].hour[daysIndex].time, 'yyyy-MM-dd HH:mm', new Date());
+        const formattedDate = format(parsedDate, 'E MMM d');
         forecastDate.textContent = formattedDate;
 
         subForecastContainer.append(forecastIcon, forecastAvgTemp, forecastText, maxMInTemp, forecastDate);
@@ -100,7 +100,10 @@ function currentWeatherDetailsLayout(weatherData){
     const avgVis = document.createElement('p');
     avgVis.textContent = 'Visibility ' + weatherData.forecast.forecastday[0].day.avgvis_miles + ' mph';
 
-    currentDetails.append(feelsLikeText, sunRise, sunSet, maxTemp, minTemp, chanceOfRain, avgTemp, avgVis);
+    const uvIndex = document.createElement('p');
+    uvIndex.textContent = "UV " + weatherData.current.uv;
+
+    currentDetails.append(feelsLikeText, sunRise, sunSet, maxTemp, minTemp, chanceOfRain, avgTemp, avgVis, uvIndex);
 }
 
 
@@ -110,15 +113,7 @@ function hourlyForecastLayout(weatherData){
     title.textContent = 'Hourly Forecast';
     hourlyForecastContainer.append(title);
     const currentDayhourlyForecastData = weatherData.forecast.forecastday[0].hour;
-    /////////////////////
-    console.log(currentDayhourlyForecastData);
-    const parsedDate = parse('2024-02-13 22:00', 'yyyy-MM-dd HH:mm', new Date());
-    const formattedDate = format(parsedDate, 'E MMM d');
 
-    const result2 = format(new Date('2024-02-13 22:00'), "h:mm a");//format(new Date(2024,2,13,19,'h'));
-    console.log(formattedDate);
-    console.log(result2);
-    ///////////////////////
     for(let hourIndex = 0; hourIndex < currentDayhourlyForecastData.length; hourIndex++){
         const subHourlyContainer = document.createElement('div');
         subHourlyContainer.classList.add('subHourlyContainer');

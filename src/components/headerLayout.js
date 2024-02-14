@@ -20,10 +20,14 @@ function headerLayout(weatherData){
     const currentLocationName = document.createElement('p');
     currentLocationName.className = 'locationName';
     currentLocationName.textContent = weatherData.location.name + ', '+ weatherData.location.region;
+
+    const searchBarContainer = document.createElement('div');
+
     const searchInput = document.createElement('input');
-    searchInput.placeholder = 'City or Zip Code'
+    searchInput.placeholder = ' City or Zip Code'
     searchInput.classList.add('userSearchInput');
     const searchBtn = document.createElement('button');
+    searchBtn.textContent = 'SEARCH';
 
     searchBtn.addEventListener('click', async () =>{
         let newWeatherData = await sendNewApiRequest(searchInput.value)
@@ -31,9 +35,8 @@ function headerLayout(weatherData){
         updateLocation(newWeatherData);
         updateLayoutData(newWeatherData);
     });
-
-    searchBtn.textContent = 'SEARCH';
-    header.append(title, currentLocationName, searchInput, searchBtn);
+    searchBarContainer.append(searchInput, searchBtn);
+    header.append(title, currentLocationName, searchBarContainer);
 }
 function clearContent(){
     let currentWeatherContainer = document.querySelector('.currentWeatherContainer');
