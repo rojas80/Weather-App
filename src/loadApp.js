@@ -25,6 +25,18 @@ function createDomElementsContainers(){
     header.classList.add('appHeader');
     const mainContainer = document.createElement('div');
     mainContainer.classList.add('appMainContainer');
+
+    const currentWeatherContainer = document.createElement('div')
+    currentWeatherContainer.classList.add('currentWeatherContainer');
+    const twoDaysForecastContainer = document.createElement('div');
+    twoDaysForecastContainer.classList.add('twoDaysForecastContainer');
+    const currentDetails = document.createElement('div');
+    currentDetails.classList.add('currentDetails');
+    const hourlyForecast = document.createElement('div');
+    hourlyForecast.classList.add('hourlyForecast');
+
+    mainContainer.append(currentWeatherContainer, currentDetails,twoDaysForecastContainer, hourlyForecast);
+
     const footer = document.createElement('footer');
     footer.classList.add('appFooter');
     body.append(header, mainContainer);

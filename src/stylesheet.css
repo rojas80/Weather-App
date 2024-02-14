@@ -8,7 +8,24 @@ header{
 }
 .appMainContainer{
     border: 1px solid blue;
+    display: grid;
+    /* grid-template-columns: repeat(2, 50vw);
+    grid-template-columns: repeat(4, 25vh);
+
+    .currentWeatherContainer,currentDetails{
+        grid-row-start: 0;
+        grid-row-end: 1;
+    }
+    .currentDetails{
+        grid-column-start: 2;
+        grid-column-start: 3;
+    } */
+
 }
+
+
+
+
 footer{
     border: 1px solid green;
 
@@ -17,4 +34,9 @@ footer{
 .githublogo{
     width: 4vw;
     height: 3vh;
+}
+
+
+.currentWeatherContainer, .currentDetails, .twoDaysForecastContainer, .hourlyForecast{
+    border: 1px solid red;
 }

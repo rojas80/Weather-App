@@ -2,8 +2,6 @@ import {fetchApiData, createSearchUrlApi} from "../modules/fetchApiData";
 import contentLayout from "./contentLayout";
 //import fetchApiData from "../modules/fetchApiData";
 
-
-
 async function sendNewApiRequest(searchInput){
     let newUrlApi = createSearchUrlApi(searchInput);
     let weatherData = await fetchApiData(newUrlApi);
@@ -27,14 +25,25 @@ function headerLayout(weatherData){
     searchInput.classList.add('userSearchInput');
     const searchBtn = document.createElement('button');
 
-    searchBtn.addEventListener('click', async () =>{ 
+    searchBtn.addEventListener('click', async () =>{
         let newWeatherData = await sendNewApiRequest(searchInput.value)
+        clearContent();
         updateLocation(newWeatherData);
         updateLayoutData(newWeatherData);
     });
 
     searchBtn.textContent = 'SEARCH';
     header.append(title, currentLocationName, searchInput, searchBtn);
+}
+function clearContent(){
+    let currentWeatherContainer = document.querySelector('.currentWeatherContainer');
+    currentWeatherContainer.textContent = '';
+    let currentDetails = document.querySelector('.currentDetails');
+    currentDetails.textContent = '';
+    let twoDaysForecastContainer = document.querySelector('.twoDaysForecastContainer');
+    twoDaysForecastContainer.textContent = '';
+    let hourlyForecast = document.querySelector('.hourlyForecast');
+    hourlyForecast.textContent = '';
 }
 
 function updateLayoutData(weatherData){
