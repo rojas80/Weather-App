@@ -1,3 +1,5 @@
+import errorLayout from "../components/errorLayout";
+
 function createSearchUrlApi(userInput){
     userInput = userInput.trim();
     const constUrl = 'https://api.weatherapi.com/v1/forecast.json';
@@ -11,12 +13,15 @@ async function fetchApiData(url = 'https://api.weatherapi.com/v1/forecast.json?k
         let response = await fetch(url);
         let weatherData = await response.json();
         if(!response.ok){
-            console.log("Red");
+            //API will return the bad request False
+            errorLayout(weatherData);
+            return response.ok;
         }
-        return weatherData; 
+        else{
+            return weatherData; 
+        }
     } catch (error) {
-        console.error('Error:', error);
-        throw error;
+        console.log(error);
     }
 }
 

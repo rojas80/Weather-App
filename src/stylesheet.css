@@ -1,36 +1,76 @@
 *{
     margin: 0;
     padding: 0;
+    color: white;
 }
+:root{
+    --bgColor: rgb(11, 19, 30);;
+    --containerBgColor: rgb(32, 43, 59);;
+}
+
 body{
     overflow: hidden;
+    background-color: var(--bgColor);
 }
+button {
+    padding: 6px 20px;
+    font-size: 16px;
+    background-color:rgb(68, 163, 255);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  /* Hover effect */
+button:hover {
+    background-color: #848b84;
+  }
+
 header{
-    border: 1px solid red;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     padding: 1%;
+    margin-bottom: 4%;
 }
 header input{
     width: 35vh;
-    height: 3vh;
+    height: 3.7vh;
     border-radius: 10px;
+    background-color: rgb(221, 224, 228);
+    border: none;
+    color: black;
 }
 .appMainContainer{
-    border: 1px solid blue;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(4, 22vh);
-   
+    grid-template-rows: repeat(2, 26vh) 15vh;
+    gap: 2%;
+    padding-left: 1%;
+    padding-right: 1%;
+    height: 100vh;
 }
+.searchBarContainer{
+    position: relative;
+}
+.errorContainer{
+    position: absolute;
+    padding: 2%;
+    background-color: rgb(68, 163, 255);;
+    border-radius: 10px;
+    right: 9vw;
+    top: 5vh;
+    display: none;
+}
+
 .currentWeatherContainer{
     grid-column-start: 1;
     grid-column-end: 2;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    
 }   
 .currentWeatherContainer img{
     width: 10vw;
@@ -40,6 +80,10 @@ header input{
     justify-content: center;
     font-weight: bolder;
     padding: 3%;
+}
+.currentWeatherInfo{
+    width: 10vw;
+
 }
 .currentDetails{
     grid-column-start: 2;
@@ -51,58 +95,69 @@ header input{
     align-items: center;
     
 } 
+
 .twoDaysForecastContainer{
     grid-column-start: 1;
-    grid-column-end: 3;
+    grid-column-end: 2;
     grid-row-start:2;
-    grid-row-end: 3;
+    grid-row-end: 4;
     text-align: center;
+    display: grid;
+    place-items: center;
+    
 }
 .twoDaysForecastContainer h2{
     margin: 1%;
 }
 
 .daysForecastContainer{
+    width: 50vw;
     display: flex;
     justify-content: space-evenly;
 }
 .subForecastContainer{
-    border: 1px solid black;
     width: 10vw;
 }
 .subForecastContainer img{
     width: 5vw;
 }
 
-
-
 .hourlyForecast{
-    grid-column-start: 1;
+    grid-column-start: 2;
     grid-column-end: 3;
-    grid-row-start:3;
-    grid-row-end: 5; 
+    grid-row-start:2;
+    grid-row-end: 4; 
     overflow: scroll;
     box-sizing: border-box;
     text-align: center;
     padding: 1%;
 }
 .subHourlyContainer{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
     border-bottom: 2px solid grey;
+    place-items: center;
 }
-footer{
-    border: 1px solid green;
 
+footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--bgColor);
+    padding: 15px;
     text-align: center;
 }
 .githublogo{
     width: 4vw;
     height: 3vh;
+    filter: invert(100%);
+}
+.githublogo:hover{
+    filter: invert(50%);
 }
 
-
 .currentWeatherContainer, .currentDetails, .twoDaysForecastContainer, .hourlyForecast{
-    border: 1px solid red;
+    background-color: var(--containerBgColor);
+    border-radius: 15px;
 }

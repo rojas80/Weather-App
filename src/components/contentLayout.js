@@ -3,6 +3,7 @@ const {format, parse} = require("date-fns");
 function currentWeatherDataLayout(weatherData){
     const currentWeatherContainer = document.querySelector('.currentWeatherContainer');
     const dataContainer = document.createElement('div');
+    dataContainer.classList.add('currentWeatherInfo');
     const iconContainer = document.createElement('div');
 
     const locationName = document.createElement('p');
@@ -38,8 +39,7 @@ function twoDaysForecastLayout(weatherData){
     daysForecastContainer.classList.add('daysForecastContainer');
     
     const forecastData =  weatherData.forecast.forecastday;
-    console.log('F:',forecastData);
-    console.log("L", forecastData.length);
+
     twoDaysForecastContainer.append(title);
 
     for(let daysIndex = 1; daysIndex < forecastData.length; daysIndex++){
@@ -60,7 +60,6 @@ function twoDaysForecastLayout(weatherData){
         maxMInTemp.textContent = forecastData[daysIndex].day.maxtemp_f +'°F / '+ forecastData[daysIndex].day.mintemp_f + '°F';
 
         const forecastDate = document.createElement('p');
-        console.log(forecastData[daysIndex].date);
 
         const parsedDate = parse(forecastData[daysIndex].hour[daysIndex].time, 'yyyy-MM-dd HH:mm', new Date());
         const formattedDate = format(parsedDate, 'E MMM d');
@@ -72,38 +71,73 @@ function twoDaysForecastLayout(weatherData){
     }
 }
 
-
 function currentWeatherDetailsLayout(weatherData){
     const currentDetails = document.querySelector('.currentDetails');
 
+    const feelsLikeTextContainer = document.createElement('div');
     const feelsLikeText = document.createElement('p');
-    feelsLikeText.textContent = 'Feels like ' + weatherData.current.feelslike_f + '°F';
+    const feelsLikeTextData = document.createElement('p');
+    feelsLikeText.textContent = 'Feels like';
+    feelsLikeTextData.textContent = weatherData.current.feelslike_f + '°F';
+    feelsLikeTextContainer.append(feelsLikeText, feelsLikeTextData);
 
-    const sunRise = document.createElement('p');
-    sunRise.textContent = 'Sunrise ' + weatherData.forecast.forecastday[0].astro.sunrise;
+    const sunRiseContainer = document.createElement('div');
+    const sunRiseText = document.createElement('p');
+    const sunRiseData = document.createElement('p');
+    sunRiseText.textContent = 'Sunrise';
+    sunRiseData.textContent = weatherData.forecast.forecastday[0].astro.sunrise;
+    sunRiseContainer.append(sunRiseText, sunRiseData);
 
-    const sunSet = document.createElement('p');
-    sunSet.textContent = 'Sunset ' + weatherData.forecast.forecastday[0].astro.sunset;
+    const sunSetContainer = document.createElement('div');
+    const sunSetText = document.createElement('p');
+    const sunSetData = document.createElement('p');
+    sunSetText.textContent = 'Sunset';
+    sunSetData.textContent = weatherData.forecast.forecastday[0].astro.sunset;
+    sunSetContainer.append(sunSetText, sunSetData);
 
-    const maxTemp = document.createElement('p');
-    maxTemp.textContent = 'Max Temp ' + weatherData.forecast.forecastday[0].day.maxtemp_f + '°F';
+    const maxTempContainer = document.createElement('div');
+    const maxTempText = document.createElement('p');
+    const maxTempData =  document.createElement('p');
+    maxTempText.textContent = 'Max Temp';
+    maxTempData.textContent = weatherData.forecast.forecastday[0].day.maxtemp_f + '°F';
+    maxTempContainer.append(maxTempText, maxTempData);
 
-    const minTemp = document.createElement('p');
-    minTemp.textContent = 'Min Temp ' + weatherData.forecast.forecastday[0].day.mintemp_f + '°F';
+    const minTempContainer = document.createElement('div');
+    const minTempText = document.createElement('p');
+    const minTempData = document.createElement('p');
+    minTempText.textContent = 'Min Temp';
+    minTempData.textContent = weatherData.forecast.forecastday[0].day.mintemp_f + '°F';
+    minTempContainer.append(minTempText, minTempData);
 
-    const chanceOfRain = document.createElement('p');
-    chanceOfRain.textContent = 'Chance Of Rain ' + weatherData.forecast.forecastday[0].day.daily_chance_of_rain + '%';
+    const chanceOfRainContainer =  document.createElement('div');
+    const chanceOfRainText = document.createElement('p');
+    const chanceOfRainData = document.createElement('p');
+    chanceOfRainText.textContent = 'Chance Of Rain';
+    chanceOfRainData.textContent = weatherData.forecast.forecastday[0].day.daily_chance_of_rain + '%';
+    chanceOfRainContainer.append(chanceOfRainText, chanceOfRainData);
 
-    const avgTemp = document.createElement('p');
-    avgTemp.textContent = 'Avg Temp ' + weatherData.forecast.forecastday[0].day.avgtemp_f + '°F';
+    const avgTempContainer = document.createElement('div');
+    const avgTempText = document.createElement('p');
+    const avgTempData = document.createElement('p')
+    avgTempText.textContent = 'Avg Temp';
+    avgTempData.textContent = weatherData.forecast.forecastday[0].day.avgtemp_f + '°F';
+    avgTempContainer.append(avgTempText, avgTempData);
 
-    const avgVis = document.createElement('p');
-    avgVis.textContent = 'Visibility ' + weatherData.forecast.forecastday[0].day.avgvis_miles + ' mph';
+    const avgVisContainer = document.createElement('div');
+    const  avgVisText = document.createElement('p');
+    const avgVisData = document.createElement('p');
+    avgVisText.textContent = 'Visibility';
+    avgVisData.textContent = weatherData.forecast.forecastday[0].day.avgvis_miles + ' mph';
+    avgVisContainer.append(avgVisText, avgVisData);
 
-    const uvIndex = document.createElement('p');
-    uvIndex.textContent = "UV " + weatherData.current.uv;
+    const uvIndexContainer =  document.createElement('div');
+    const uvIndexText = document.createElement('p');
+    const uvIndexData = document.createElement('p');
+    uvIndexText.textContent = 'UV'
+    uvIndexData.textContent = weatherData.current.uv;
+    uvIndexContainer.append(uvIndexText, uvIndexData);
 
-    currentDetails.append(feelsLikeText, sunRise, sunSet, maxTemp, minTemp, chanceOfRain, avgTemp, avgVis, uvIndex);
+    currentDetails.append(feelsLikeTextContainer, sunRiseContainer, sunSetContainer, maxTempContainer, minTempContainer, chanceOfRainContainer, avgTempContainer, avgVisContainer, uvIndexContainer);
 }
 
 
